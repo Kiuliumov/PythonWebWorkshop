@@ -1,74 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <!-- Starts Head Section -->
-  <head>
-    <link rel="stylesheet" href="/static/css/styles.css" />
-    <link
-      rel="icon"
-      type="image/x-icon"
-      href="/static/images/free-30-instagram-stories-icons23_122570.png"
-    />
-    <title>Petstagram</title>
-  </head>
-  <!-- End Head Section -->
+{% extends 'base.html' %}
+{% load static %}
 
-  <!-- Starts Body Section -->
-  <body>
-    <!-- Starts Header Section with Navigation Bar -->
-    <header>
-      <nav class="navbar">
-        <div class="container">
-          <div class="logo">
-            <!-- Link to Home Page -->
-            <a href="#">
-              <img
-                width="50px"
-                src="/static/images/free-30-instagram-stories-icons23_122570.png"
-                alt="img1"
-              />
-            </a>
-
-            <!-- Link to Home Page -->
-            <a class="home" href="#">
-              <i>Petstagram</i>
-            </a>
-          </div>
-
-          <div class="nav-links">
-            <ul class="nav-group">
-              <li class="nav-item">
-                <!-- Link to Add Pet Page -->
-                <a href="#">
-                  <i>Add Pet</i>
-                </a>
-              </li>
-              <li class="nav-item">
-                <!-- Link to Add Photo Page -->
-                <a href="#">
-                  <i>Add Photo</i>
-                </a>
-              </li>
-              <li class="nav-item">
-                <!-- Link to Profile Page -->
-                <a href="#">
-                  <i>Profile</i>
-                </a>
-              </li>
-              <li class="nav-item">
-                <!-- Log out -->
-                <a href="#">
-                  <i>Log out</i>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-    <!-- End Header Section with Navigation Bar -->
-
-    <!-- Starts Main Section -->
-    <main>
+{% block content %}
       <!-- Start Profile Details Section -->
       <div class="profile">
         <!-- Start Profile Personal Data Section -->
@@ -76,29 +9,28 @@
           <div class="profile_img">
             <div class="image">
               <!-- Profile Image -->
-              <img src="/static/images/person.png" alt="img8" />
+              <img src="{%  static 'images/person.png' %}" alt="img8" />
             </div>
           </div>
           <div class="personal">
             <div class="edit">
-              <!-- User Username -->
-              <p>d_kalaydzhiev</p>
+              <p>{{ username }}</p>
 
               <!-- IF the viewer is the owner of the profile -->
               <!-- Link to Edit Profile Page -->
-              <a href="#">
+              <a href="{% url 'edit' %}">
                 <img
                   class="edit-img"
-                  src="/static/images/edit-pen-icon-6.jpg"
+                  src="{%  static 'images/edit-pen-icon-6.jpg' %}"
                   alt="edit button"
                 />
               </a>
 
               <!-- Link to Delete Profile Page -->
-              <a href="">
+              <a href="{% url 'delete' %}">
                 <img
                   class="bin-img"
-                  src="/static/images/icon-remove-22.jpg"
+                  src="{% static 'images/icon-remove-22.jpg' %}'"
                   alt="bin button"
                 />
               </a>
@@ -106,25 +38,25 @@
             </div>
             <div class="data">
               <!-- Total Number of Photos by the User -->
-              <span>4</span>
+              <span>{{ total_number_of_photos }}</span>
               <p>photos</p>
 
               <!-- Total Number of Pets owned by the User -->
-              <span>7</span>
+              <span>{{ total_number_of_pets }}</span>
               <p>pets</p>
 
               <!-- Total Number of Likes for the User -->
-              <span>436</span>
+              <span>{{ total_number_of_likes }}</span>
               <p>likes</p>
             </div>
-            <!-- User First and Last Name IF Added -->
+              {% if first_name and last_name %}
             <h3 class="names">Diyan Kalaydziev</h3>
-
+              {% endif %}
             <!-- User Email Address -->
-            <p class="email">d.denov@gmail.com</p>
-
-            <!-- User Gender IF Added -->
-            <p class="gender">Male</p>
+            <p class="email">{{ email }}</p>
+              {% if gender %}            
+                <p class="gender">Male</p>
+              {% endif %}
           </div>
         </div>
         <!-- End Profile Personal Data Section -->
@@ -307,16 +239,4 @@
         />
       </div>
 
-      <!-- End Profile Details Section -->
-    </main>
-    <!-- End Main Section -->
-
-    <!-- Start Footer Section -->
-    <div class="footer">
-      <span class="footer-section">
-        © 2024 SOFTUNI WORKSHOP FOR PYTHON WEB MODULE
-      </span>
-    </div>
-    <!-- End Footer Section -->
-  </body>
-</html>
+{% endblock %}
