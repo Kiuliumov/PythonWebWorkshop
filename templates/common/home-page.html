@@ -60,7 +60,7 @@
                     <div class="left">
                         <!-- Start Like Button -->
                         <span class="heart">
-                        <a href="{% url 'like-photo' photo.id %}">
+                        <a href="{% url 'like' photo.id %}">
                             {% if photo.likes.exists %}
                                     <i class="fa-solid fa-heart" style="color: #ed4040;"></i>
                                 {% else %}
