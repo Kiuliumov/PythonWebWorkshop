@@ -1,8 +1,17 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from PythonWebWorkshop1.utils import get_profile
+from accounts.forms import RegisterForm
 # Create your views here.
 def register(request):
-    return render(request, template_name='accounts/register-page.html')
+    form = RegisterForm(request.POST or None)
+    first_user = get_profile()
+
+    if request.method == 'POST':
+
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    return render(request, template_name='accounts/register-page.html', context={'form': form, 'profile':first_user})
 
 def login(request):
     return render(request, template_name='accounts/login-page.html')
